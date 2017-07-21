@@ -4,14 +4,20 @@
 		<meta charset="utf-8" />
 		<title></title>
 		<link rel="stylesheet" href="css/base.css" />
-		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/buyer_of_China.css" />
 	</head>
 
 	<body>
-		<header>
-			<p></p>
-			<h1>北方跨境电商大数据中心</h1>
-		</header>
+		<div class="top">
+			<p class="left">
+				<span class="span1">2017年7月14日 星期五</span>
+				<span class="span2">10:01</span>
+				<span class="span3">天气：晴转多云</span>
+			</p>
+			<p class="mid">北方跨境电商大数据中心</p>
+			<p class="right">系统通知：消防系统紧急演练，时间07/10</p>
+		</div>
+
 		<div class="China_map"></div>
 		<div class="right">
 			<section class="chart_a"></section>
@@ -25,7 +31,13 @@
 				<img src="img/enlarge.png" />
 			</div>
 		</div>
+		<div class="footer">
+			<span>京公网安备 11000002000088号</span>|
+			<span>京ICP证070359号|互联网药品信息服务资格证编号（京）-经营性-2014-0008</span>|
+			<span>新出发京零字第大12007号</span>
+		</div>
 		<div class="shade hide">
+			<div class="shade_inner"></div>
 			<img class="reduce" src="img/reduce.png" />
 		</div>
 		<script type="text/javascript" src="js/echarts.js"></script>
@@ -35,43 +47,7 @@
 		<script>
 		
 		var option=[];
-		var oP=document.querySelector("header p");
-		function thisTime(){
-			 var mydate=new Date();
-			 var a=mydate.getFullYear();
-			 var b=mydate.getMonth()+1;
-			 var c=mydate.getDate();
-			 var d=mydate.getDay();
-			 var dd="";
-			 switch(d){
-			 	case 0:
-			 		dd="星期一";
-			 		break;
-			 	case 1:
-			 		dd="星期二";
-			 		break;
-			 	case 2:
-			 		dd="星期三";
-			 		break;
-			 	case 3:
-			 		dd="星期四";
-			 		break;
-			 	case 4:
-			 		dd="星期五";
-			 		break;
-			 	case 5:
-			 		dd="星期六";
-			 		break;
-			 	case 6:
-			 		dd="星期日";
-			 		break;
-			 }
-			 return (a+"年"+b+"月"+c+"日"+" ");
-			
-		}
-		function fun(data){	
-			oP.innerHTML=thisTime()+" 天气："+data.results[0].weather_data[0].weather;
-		}
+		
 	
 	//************地图
 var geoCoordMap = {
@@ -468,7 +444,10 @@ var series = [];
         label: {
             normal: {
                 show: true,
-                position: 'inside',
+                position: 'bottom',
+                textStyle:{
+                	fontSize:16,
+                },
                 formatter: {
 				    data: convertData(BJData),
                 },
@@ -515,6 +494,7 @@ option[0] = {
 
 	tooltip : {
             trigger: 'item',
+            padding: [10, 20],
             formatter: function (params,ticket,callback){
                 var pna = params.name;
                 var res = '';
@@ -533,10 +513,10 @@ option[0] = {
             }
         },
     geo:[{
-    	zlevel:0,
 			map: 'china-contour',
 			roam: false,
 			silent:true,
+			zoom:1.1,
 			label: {
 				normal: {
 					show: false,
@@ -563,7 +543,6 @@ option[0] = {
 		},{
         map: 'china',
         label: {
-        	
             emphasis: {
                 show: true,
                 textStyle:{
@@ -573,7 +552,7 @@ option[0] = {
                 }
             }
         },
-        
+        zoom:1.1,
         roam: false,
         itemStyle: {
             normal: {
@@ -659,9 +638,6 @@ option[0] = {
 								show:false
 							},
                             type: 'value',
-
-                            min: 0,
-                            max: 2000,
                             interval: 500,
                             axisLabel: {
                             	interval: 0,
@@ -669,7 +645,7 @@ option[0] = {
                             	showMinLabel:true,
                             	margin:2,
                             	textStyle:{
-                            		fontSize:8
+                            		fontSize:'50%',
                             	},
                                 formatter: '{value} '
                             }
@@ -687,7 +663,7 @@ option[0] = {
        								 shadowColor: '#81677f'
 								}
 							},
-                            barWidth:'35%',
+                            barWidth:'30%',
                             data:[700, 1000, 950, 800, 950, 850, 900, 1000, 600, 950, 820, 760, 710, 900, 750, 800]
                         },
                         {
@@ -745,9 +721,10 @@ option[0] = {
 							},
                         	axisLabel:{
                         		interval:0,   //强制显示所有坐标
-                        		rotate:45,
+//                      		rotate:45,
                         		textStyle:{
-                        			fontWeight:'lighter'
+                        			fontWeight:'lighter',
+                        			fontSize:'50%',
                         		}
                         	},
 							axisLine:{
@@ -774,9 +751,6 @@ option[0] = {
 								show:false
 							},
                             type: 'value',
-
-                            min: 0,
-                            max: 20000,
                             interval: 5000,
                             axisLabel: {
                             	interval: 0,
@@ -784,7 +758,7 @@ option[0] = {
                             	showMinLabel:true,
                             	margin:2,
                             	textStyle:{
-                            		fontSize:8
+                            		fontSize:'50%',
                             	},
                                 formatter: '{value} '
                             }
@@ -802,7 +776,7 @@ option[0] = {
        								 shadowColor: '#81677f'
 								}
 							},
-                            barWidth:'28%',
+                            barWidth:'26%',
                             data:[5700, 10000, 9500, 8000, 9500, 8500, 9000, 11000, 6000, 9500, 8200, 7600]
                         },
                         {
@@ -1046,7 +1020,7 @@ option[0] = {
 							},
                         	axisLabel:{
                         		interval:0,   //强制显示所有坐标
-                        		rotate:30,
+//                      		rotate:30,
                         		textStyle:{
                         			fontWeight:'lighter'
                         		}
@@ -1056,7 +1030,8 @@ option[0] = {
 //                      	},
 							axisLine:{
 								lineStyle:{
-									color:'#fff'
+									color:'#fff',
+									fontSize:'50%',
 								}
 							},
                             type: 'category',
@@ -1078,16 +1053,16 @@ option[0] = {
 								show:false
 							},
                             type: 'value',
-//                          name: '',
-                            min: 0,
-                            max: 120,
                             interval: 20,
                             axisLabel: {
                             	show:true,
                             	interval:0,
                             	showMaxLabel:false,
                             	showMinLabel:true,
-                            	margin:2,
+                            	margin:4,
+                            	textStyle:{
+                            		fontSize:'50%',
+                            	},
 //                              formatter: '{value} '
                             }
                         }
@@ -1204,7 +1179,7 @@ option[0] = {
                                },
                             },
                             
-                            barWidth:'30%',
+                            barWidth:'28%',
                             data:[25, 60, 70, 55, 45, 30, 45, 31]
                         },
                         {
@@ -1230,46 +1205,58 @@ option[0] = {
 		
 		//放大镜功能
 		var oShade = document.querySelector(".shade");
+		var oShadeInner = document.querySelector(".shade_inner");
 		var oReduce = document.querySelector("img.reduce");
 		var oEnlarge=document.querySelectorAll(".enlarge img");
 		var oDiv=document.querySelector(".box div");
+		var oSection = document.querySelectorAll(".right section");
 		for(var i=0;i<oEnlarge.length;i++){
 			oEnlarge[i].index=i;
 			oEnlarge[i].onclick = function(){
+				var that = this.index;
 				var node=document.createElement("div");
 				node.setAttribute("class","box");
-				oShade.appendChild(node);
+				oShadeInner.appendChild(node);
+				var oShadeWidth = oSection[this.index].getBoundingClientRect().right-oSection[this.index].getBoundingClientRect().left;
+				var oShadeHeight = oSection[this.index].getBoundingClientRect().bottom-oSection[this.index].getBoundingClientRect().top;
+				oShadeInner.style.left=oSection[this.index].getBoundingClientRect().left+oShadeWidth/2+"px";
+				oShadeInner.style.top=oSection[this.index].getBoundingClientRect().top+oShadeHeight/2+"px";
+				oShadeInner.style.width=0;
+				oShadeInner.style.height=0;
 				oShade.setAttribute("class","shade");
-				var chart5 = echarts.init(node);
-				var op=option[this.index+1];
-				console.log(op.legend.itemWidth);
-				op.height='70%';
-				op.width='80%';
-				op.title.textStyle.fontSize=24;
-				op.legend.textStyle.fontSize=16;
-				op.title.left='10%';
-				op.title.top='10%';
-				op.legend.right='8%';
-				op.legend.itemWidth=50;
-				op.legend.itemHeight=25;
-				if(this.index==2){
-					op.series.label.normal.textStyle.fontSize=16;
+				oShadeInner.setAttribute("class","shade_inner shade_inner_animate");
+				setTimeout(Enlarge,500);
+				function Enlarge(){
+					var chart5 = echarts.init(node);
+					var op=option[that+1];
+					op.height='70%';
+					op.width='80%';
+					op.title.textStyle.fontSize=24;
+					op.legend.textStyle.fontSize=16;
+					op.title.left='10%';
+					op.title.top='10%';
+					op.legend.right='8%';
+					op.legend.itemWidth=50;
+					op.legend.itemHeight=20;
+					if(that==2){
+						op.series.label.normal.textStyle.fontSize=16;
+						
+					}else{
+						op.xAxis[0].axisLabel.textStyle.fontSize='100%';
+						op.yAxis[0].axisLabel.textStyle.fontSize='100%';
+					};
+					chart5.setOption(option[that+1]);
 					
-				}else{
-				};
-				chart5.setOption(option[this.index+1]);
+				}
 			}
 		}
 		oReduce.onclick = function(){
 			oShade.setAttribute("class","shade hide");
 			var oBox = document.querySelector(".box");
-			oShade.removeChild(oBox);
+			oShadeInner.removeChild(oBox);
 		}
 		
 		
-		</script>
-		
-		<script src="http://api.map.baidu.com/telematics/v3/weather?location=北京&output=json&ak=KdhEeXIswBzw5fOPwTbg4huHXSFQ34pR&callback=fun">
 		</script>
 	</body>
 
